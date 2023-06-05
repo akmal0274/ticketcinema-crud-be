@@ -1,0 +1,7 @@
+runtime: nodejs16 # or another supported version
+service: be-movieticket-crud
+
+env_variables:
+  BUCKET_NAME: "be-vehicletaxes-bucket"
+  SECRET_KEY: "cinematicket"
+  DATABASE_URL: "mysql://root@104.155.212.214:3306/cinematicket?schema=public"
