@@ -1,5 +1,6 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
+
 const { PrismaClient } = require('@prisma/client');
 
 const prisma = new PrismaClient();
@@ -30,6 +31,7 @@ const verifyToken = (req, res, next) => {
 app.post('/tickets', verifyToken, async (req, res) => {
   try {
     const { title, genre, description, price } = req.body;
+    const userId = req.userId;
 
     // Create the ticket in the database
     const newTicket = await prisma.ticket.create({
@@ -37,7 +39,8 @@ app.post('/tickets', verifyToken, async (req, res) => {
         title,
         genre,
         description,
-        price
+        price,
+        user: { connect: { id: userId } }
       }
     });
 
